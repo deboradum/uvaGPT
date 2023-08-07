@@ -16,9 +16,11 @@ from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 class UvaGPT:
     def __init__(self, model="all"):
         load_dotenv()
+        self.model = model
         self.pdf_file = f"PDFs/{model}.pdf"
         self.txt_file = f"txts/{model}.txt"
         self.db_name = f"DBs/{model}.pkl"
+        self.chunks_path = f"chunks/{model}_chunks.index"
 
         if not os.path.isfile(self.txt_file):
             print(f"Creating {self.txt_file}...")
@@ -37,7 +39,7 @@ class UvaGPT:
     def run(self):
         print("Starting chat. Type 'q' or 'exit' to quit.")
         while True:
-            query = input("Ask your question: ")
+            query = input(f"Model: {model}GPT. Ask your question: ")
             if not query:
                 continue
             if query == "q" or query == "exit":
@@ -67,14 +69,14 @@ class UvaGPT:
 
     def create_faiss_db(self, chunks):
         store = FAISS.from_texts(chunks, OpenAIEmbeddings())
-        faiss.write_index(store.index, "chunks.index")
+        faiss.write_index(store.index, self.chunks_path)
         store.index = None
         with open(self.db_name, "wb") as f:
             pickle.dump(store, f)
 
 
     def load_faiss_db(self):
-        index = faiss.read_index("chunks.index")
+        index = faiss.read_index(self.chunks_path)
 
         with open(self.db_name, "rb") as f:
             db = pickle.load(f)
@@ -91,17 +93,16 @@ class UvaGPT:
 all_models = ['all', 'arco']
 
 parser = argparse.ArgumentParser()
-# Automatically create 'all' database.
+# TODO: Automatically create 'all' database.
 parser.add_argument('-m', '--model', type=str, default="all",
                     help=f'The model (course) you want to query. \
                     Model must be one of these values: {all_models}, and defaults \
                     to all models.')
 
 model = parser.parse_args().model
-
 if model not in all_models:
     print(f"Model: {model} not supported. please pick one of the following models: {all_models}")
     exit()
 
-uva = UvaGPT()
+uva = UvaGPT(model=model)
 uva.run()
