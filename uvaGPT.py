@@ -123,6 +123,7 @@ class UvaGPT:
 
 
 ALL_MODELS = get_all_models()
+ALL_MODELS.sort()
 model = parse()
 uva = UvaGPT(model=model)
 uva.run()
