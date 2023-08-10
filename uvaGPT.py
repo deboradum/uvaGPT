@@ -14,10 +14,10 @@ from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 
 
 def get_all_models():
-    return [m.removesuffix(".pdf") for m in os. listdir("PDFs/") if m != ".DS_Store"]
+    return [m.removesuffix(".pdf") for m in os. listdir("PDFs/") if m != ".DS_Store"]  # Change to txts to include SR
 
 
-def parse():
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model',
                         type=str,
@@ -26,12 +26,7 @@ def parse():
                         help=f'The model (course) you want to query. \
                         Model must be one of these values: {ALL_MODELS}.')
 
-    model = parser.parse_args().model
-    if model not in ALL_MODELS:
-        print(f"Model: {model} not supported. please pick one of the following models: {ALL_MODELS}")
-        exit()
-
-    return model
+    return parser.parse_args().model
 
 
 class UvaGPT:
@@ -85,7 +80,7 @@ class UvaGPT:
         with open(self.txt_file, "r") as f:
             text = f.read()
 
-        text_splitter = CharacterTextSplitter(chunk_size=1250, separator="\n\n\n")
+        text_splitter = CharacterTextSplitter(chunk_size=1250, separator="\n\n")
         chunks = []
         splits = text_splitter.split_text(text)
         chunks.extend(splits)
@@ -118,6 +113,6 @@ class UvaGPT:
 
 ALL_MODELS = get_all_models()
 ALL_MODELS.sort()
-model = parse()
+model = parse_args()
 uva = UvaGPT(model=model)
 uva.run()
