@@ -3243,9 +3243,9 @@ a
 
 l
 
- 
-
 i
+
+ 
 
 e
 d
@@ -29356,9 +29356,9 @@ TOR switches
 
 Server racks
 
-2
-
 3
+
+2
 
 12
 1
@@ -29368,15 +29368,15 @@ Figure 6.31  ♦  Highly interconnected data network topology
 
 11
 
-8
+4
 
-6
+8
 
 5
 
 7
 
-4
+6
 
 9
 

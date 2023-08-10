@@ -48023,9 +48023,9 @@ Hint: A complete binary tree is one where every internal node has exactly two
 children. Use the fact that the number of diﬀerent complete binary trees with
 n leaf nodes is:
 
-)
-
 (
+
+)
 
 If you wish, you can derive the formula for the number of complete binary trees
 with n nodes from the formula for the number of binary trees with n nodes.
@@ -67677,9 +67677,9 @@ h  (v   , v  )
 
  1
 
- 2
-
  3
+
+ 2
 
 h  (i  )=00
 1 
@@ -67696,11 +67696,11 @@ h  (i  )=11
 h  (i  )=10
 1
 
+ 6
+
  5
 
  4
-
- 6
 
  7
 
@@ -67731,13 +67731,13 @@ h  (v    , v  )
 h  (h  (i  ), h  (i  ))
 2
 
+4
+
 3
 
 1
 
 3
-
-4
 
 h  (h  (i  ))
 2
@@ -67749,22 +67749,22 @@ h  (h  (i  ))
 h  (h  (i  ), h  (i  ))
 2
 
+3
+
+3
+
 7
-
-3
-
-3
 
 5
 
 h  (h  (i  ), h  (i  ))
 2
 
-3
-
-3
-
 6
+
+3
+
+3
 
 3
 
