@@ -10,7 +10,6 @@ from langchain.memory import ConversationBufferMemory
 import os
 import pickle
 from pdfminer.high_level import extract_text
-from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 
 
 # Returns a list of all available models.
